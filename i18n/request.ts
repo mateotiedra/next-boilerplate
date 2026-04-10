@@ -1,0 +1,18 @@
+import { getRequestConfig } from 'next-intl/server';
+import { defaultLocale, isLocale } from './config';
+
+/**
+ * next-intl request config. Wired by `next.config.ts` via the
+ * `createNextIntlPlugin` wrapper. Reads the locale from the request
+ * (cookie or URL segment) and loads the matching messages file.
+ */
+
+export default getRequestConfig(async ({ requestLocale }) => {
+  const requested = await requestLocale;
+  const locale = requested && isLocale(requested) ? requested : defaultLocale;
+
+  return {
+    locale,
+    messages: (await import(`../messages/${locale}.json`)).default,
+  };
+});

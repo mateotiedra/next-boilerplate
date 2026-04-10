@@ -1,0 +1,42 @@
+{
+  "common": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "signOut": "Sign out",
+    "dashboard": "Dashboard",
+    "pricing": "Pricing",
+    "getStarted": "Get started",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back"
+  },
+  "marketing": {
+    "hero": {
+      "title": "Build your SaaS faster",
+      "subtitle": "Production-ready Next.js boilerplate with auth, payments, and monitoring.",
+      "cta": "Start building"
+    }
+  },
+  "auth": {
+    "signInTitle": "Welcome back",
+    "signInSubtitle": "Sign in to your account",
+    "signUpTitle": "Create an account",
+    "signUpSubtitle": "Get started in seconds"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "general": "General",
+    "security": "Security",
+    "activity": "Activity",
+    "team": "Team",
+    "billing": "Billing"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "unauthorized": "You must be signed in to access this page.",
+    "notFound": "Page not found."
+  }
+}

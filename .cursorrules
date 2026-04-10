@@ -1,0 +1,63 @@
+# Cursor Rules
+
+This file mirrors the core rules from CLAUDE.md so Cursor's AI agent follows the same conventions. Always read `CLAUDE.md` for the full picture.
+
+## Project Overview
+Next.js SaaS boilerplate with Kinde auth, Drizzle ORM, Stripe payments, and Shadcn/UI. Deployed on VPS via Dokploy.
+
+## Stack
+- Next.js (App Router, `output: "standalone"`)
+- TypeScript strict mode
+- Tailwind CSS + Shadcn/UI (`components/ui/`)
+- Kinde auth (`@kinde-oss/kinde-auth-nextjs`) — no custom passwords
+- PostgreSQL + Drizzle ORM (`lib/db/`)
+- Stripe (`lib/payments/`, `app/api/stripe/`)
+- Resend (`lib/email/`)
+- Redis via ioredis (`lib/redis/`)
+- GlitchTip via `@sentry/nextjs` (`lib/monitoring/`)
+- Zod for all input validation
+- next-intl for i18n (`messages/`)
+
+## Rules
+1. **TypeScript strict** — never use `any`.
+2. **Zod** — validate all user input.
+3. **No direct DB calls in pages** — use `lib/db/queries.ts`.
+4. **Server Actions for mutations** — wrap with `validatedAction` / `validatedActionWithUser` from `lib/auth/middleware.ts`.
+5. **Auth = Kinde** — never write custom password logic. Use `getKindeUser()` / `getUser()`.
+6. **Shadcn/UI first** — don't reinvent components that exist in `components/ui/`.
+7. **No client secrets** — only `NEXT_PUBLIC_*` goes to the browser.
+8. **Package manager**: always `pnpm`, never `npm` or `yarn`.
+
+## Patterns
+- Add a new protected page: create `app/(dashboard)/dashboard/<name>/page.tsx`. Middleware auto-protects.
+- Add a server action: put it in the nearest `actions.ts`, wrap with `validatedActionWithUser(schema, ...)`.
+- Add a Shadcn component: `npx shadcn@latest add <name>`.
+- DB schema change: edit `lib/db/schema.ts`, run `pnpm db:generate` then `pnpm db:migrate`.
+- New email: add a function in `lib/email/index.ts` using `sendEmail()`.
+
+## Commands
+```bash
+docker compose -f docker-compose.dev.yml up -d   # start postgres + redis
+pnpm dev           # start dev server
+pnpm db:generate   # generate migration
+pnpm db:migrate    # apply migrations
+pnpm db:seed       # seed test data
+pnpm db:studio     # drizzle studio
+pnpm build         # production build
+pnpm test          # Vitest unit tests
+pnpm test:e2e      # Playwright e2e tests
+```
+
+## Tests
+- Unit tests live in `tests/unit/`, e2e in `tests/e2e/`.
+- Vitest + Testing Library for unit, Playwright for e2e.
+- Don't mock the database — use real Postgres from `docker-compose.dev.yml`.
+
+## Env
+See `.env.example`. Validate env vars through `lib/env.ts` — never read `process.env` directly in feature code.
+
+## Do not
+- Do not implement custom auth (passwords, JWT, sessions).
+- Do not call `db` from inside `app/` pages or components — always go through `lib/db/queries.ts`.
+- Do not introduce monorepo / tRPC / Prisma / Clerk — these were explicitly ruled out.
+- Do not bypass the Zod validation wrappers in `lib/auth/middleware.ts`.

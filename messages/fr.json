@@ -1,0 +1,42 @@
+{
+  "common": {
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "signOut": "Se déconnecter",
+    "dashboard": "Tableau de bord",
+    "pricing": "Tarifs",
+    "getStarted": "Commencer",
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "back": "Retour"
+  },
+  "marketing": {
+    "hero": {
+      "title": "Construisez votre SaaS plus vite",
+      "subtitle": "Boilerplate Next.js prêt pour la production avec auth, paiements et monitoring.",
+      "cta": "Commencer à construire"
+    }
+  },
+  "auth": {
+    "signInTitle": "Bon retour",
+    "signInSubtitle": "Connectez-vous à votre compte",
+    "signUpTitle": "Créer un compte",
+    "signUpSubtitle": "Lancez-vous en quelques secondes"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "general": "Général",
+    "security": "Sécurité",
+    "activity": "Activité",
+    "team": "Équipe",
+    "billing": "Facturation"
+  },
+  "errors": {
+    "generic": "Une erreur est survenue. Veuillez réessayer.",
+    "unauthorized": "Vous devez être connecté pour accéder à cette page.",
+    "notFound": "Page introuvable."
+  }
+}
